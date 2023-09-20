@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,17 +26,34 @@ public class Main {
         cities.stream().forEach(Main::printCity);
 
         //ejecucion en varios nucleos -> PARALLEL
-        //si el procesador tiene varios nucleos puedo usar el parallel para que ejecute en varios hilos
         cities.stream().parallel().forEach(city -> System.out.println(city));
-        //separa la lista endiferentes lotes para procesarlos y luego los procesa esto logra que se procecen mas rapido
-        //pero el enlistado sera diferente.
 
+        //pipeline pasa metodo por metodo en la misma linea
+        cities.stream().filter(city->city.startsWith("B")).forEach(city -> System.out.println(city));
+
+        //Expresion lambda con varias lineas
+        cities.stream().filter(city-> {
+            Boolean result = city.startsWith("B");
+            return result;
+        }).forEach(city -> System.out.println(city));
+
+        cities.stream().filter(city->city.startsWith("B"))
+                .filter(city->city.contains("n"))
+                .forEach(city -> System.out.println(city));
+
+        //metodo terminal y no terminal
+        List<String> filteredCities = cities.stream().filter(city->city.startsWith("B"))
+                .filter(city->city.contains("n"))
+                        .collect(Collectors.toList());
 
         System.out.println("Hello world!");
     }
+
+
     //*1
     //expresion lamba --> hacer funciones lo mas reducida posible
     public static void printCity(String city){
         System.out.println(city);
     };
+
 }
