@@ -16,6 +16,10 @@ public class Main {
         cities.stream().forEach(city -> System.out.println(city));
                                 //expresion lambda*1
 
+        //si quiero pasar la funcion directamente
+        cities.stream().forEach(Main::printCity);
+        // :: -> hace referencia al metodo.
+
         System.out.println("Hello world!");
     }
     //*1
