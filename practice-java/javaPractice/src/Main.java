@@ -12,7 +12,15 @@ public class Main {
         for(String city : cities){
             System.out.println(city);
         }
+        //Con stream para recorrer
+        cities.stream().forEach(city -> System.out.println(city));
+                                //expresion lambda*1
 
         System.out.println("Hello world!");
     }
+    //*1
+    //expresion lamba --> hacer funciones lo mas reducida posible
+    public static void printCity(String city){
+        System.out.println(city);
+    };
 }
