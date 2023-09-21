@@ -12,16 +12,20 @@ public class Main {
     //Download Webs
     //start url
     String link = "https://www.bbc.com/";
-    //objectUrl
+    String result = getWebContent(link);
+        System.out.println(result);
+    }
+    private static String getWebContent(String link) throws IOException {
+        //objectUrl
         URL url = new URL(link);
-    //Conexión:
+        //Conexión:
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-    //download header content
-    String encoding = conn.getContentEncoding();
-    //download information
+        //download header content
+        String encoding = conn.getContentEncoding();
+        //download information
         InputStream input = conn.getInputStream();
         String result = new BufferedReader(new InputStreamReader(input))
                 .lines().collect(Collectors.joining());
-        System.out.println(result);
-    }
+        return result;
+    };
 }
