@@ -11,13 +11,31 @@ public class Main {
             String from = "BCN";
             String to = "JFK";
 
-            Double lowestPrice = 0.0;
-            Double avrPrive = 0.0;
+            Double lowestPrice = getLowestPrice(from,to);
+            Double avgPrice = getAvgPrice(from,to);
 
             Double result = getPriceTrip("Delta Airlines",from,to);
                 System.out.println(result);
-            System.out.println(getLowestPrice(from,to));
+
+            System.out.println("lowestPrice: "+ lowestPrice);
+            System.out.println("avgPrice:"+avgPrice);
     }
+    private static Double getAvgPrice(String from, String to){
+        //Con atomicReference hago atomico cualquier clase que tenga.
+        AtomicReference<Double> sumPrice= new AtomicReference<>(0.0);
+        AtomicInteger countAirlines = new AtomicInteger(0);
+        pricesByAirline.keySet().stream().parallel().forEach(airline -> {
+            Double price = getPriceTrip(airline, from, to);
+            Double result = sumPrice.get() + price;
+            sumPrice.set(result);
+            countAirlines.incrementAndGet();
+        });
+
+        //cantidad de aerolinea tmb se podia hacer:
+        pricesByAirline.keySet().size();
+
+        return sumPrice.get() / countAirlines.get();
+    };
         private static Double getLowestPrice(String from, String to){
             //Con atomicReference hago atomico cualquier clase que tenga.
             AtomicReference<Double> lowestPrice = new AtomicReference<>(null);
