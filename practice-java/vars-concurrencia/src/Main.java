@@ -32,7 +32,7 @@ public class Main {
         });
 
         //cantidad de aerolinea tmb se podia hacer:
-        pricesByAirline.keySet().size();
+        int totalAirlines = pricesByAirline.keySet().size();
 
         return sumPrice.get() / countAirlines.get();
     };
