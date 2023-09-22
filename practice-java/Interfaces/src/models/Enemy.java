@@ -4,12 +4,13 @@ package models;
 public abstract class Enemy {
     protected Double health;
     protected Integer posX;
-    protected Integer PosY;
+    protected Integer posY;
 
+    public Enemy(){};
     public Enemy(Double health, Integer posX, Integer posY) {
         this.health = health;
         this.posX = posX;
-        PosY = posY;
+        this.posY = posY;
     }
 
     public Double getHealth() {
@@ -29,10 +30,10 @@ public abstract class Enemy {
     }
 
     public Integer getPosY() {
-        return PosY;
+        return this.posY;
     }
 
     public void setPosY(Integer posY) {
-        PosY = posY;
+        this.posY = posY;
     }
 }
